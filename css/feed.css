@@ -1,0 +1,27 @@
+img{
+    width: 400px;
+    height:250px;
+}
+
+.feed {
+    position: absolute;
+    left:30%;
+    top: 20%;
+    margin:0;
+    padding:1%;
+    border:1px dashed black;
+}
+
+.feed .name{
+    font-size: 40px;
+}
+
+.feed .info{
+    font-size: 25px;
+    text-align: right;
+}
+
+.feed .bio{
+    font-size: 20px;
+    text-align: justify;
+}
