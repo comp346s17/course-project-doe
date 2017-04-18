@@ -1,0 +1,15 @@
+{% extends 'smack/base.html' %}
+{% block title %}Contine Profile{% endblock %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+      </p>
+    {% endfor %}
+    <button type="submit">Submit Profile</button>
+  </form>
+{% endblock %}

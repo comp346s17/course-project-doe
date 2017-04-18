@@ -1,0 +1,9 @@
+{% extends 'smack/base.html' %}
+
+{% block content %}
+  {% for profile in profiles %}
+    <p>{{ profile.user.username }}</p>
+    <p>{{profile.score|add:current.score}}</p>
+    <br>
+  {% endfor %}
+{% endblock %}

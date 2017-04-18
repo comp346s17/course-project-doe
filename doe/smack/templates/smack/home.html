@@ -1,0 +1,6 @@
+{% extends 'smack/base.html' %}
+{% block content %}
+<p>Welcome {{ user.username }}</p>
+<a href="{% url 'datingFeed' %}">Dating Feed</a>
+<a href="{% url 'friendFeed' %}">Friend Feed</a>
+{% endblock %}
