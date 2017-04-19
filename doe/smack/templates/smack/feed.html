@@ -2,8 +2,20 @@
 
 {% block content %}
   {% for profile in profiles %}
-    <p>{{ profile.user.username }}</p>
-    <p>{{profile.score|add:current.score}}</p>
-    <br>
+    {% if profile in like %}
+      <p>{{ profile.user.username }}</p>
+      <p>{{ profile.email }}</p>
+      {% load static %}
+      <img src="/Users/elevin/Documents/Macalester/Spring%202017/Internet%20Computing/FinalProject/doe/static/ethan.jpg">
+      <p>{{profile.score|add:current.score}}</p>
+      <br>
+    {% elif profile in dislike %}
+    {% else %}
+      <p>{{ profile.user.username }}</p>
+      {% load static %}
+      <img src="/Users/elevin/Documents/Macalester/Spring%202017/Internet%20Computing/FinalProject/doe/static/ethan.jpg">
+      <p>{{profile.score|add:current.score}}</p>
+      <br>
+    {% endif %}
   {% endfor %}
 {% endblock %}

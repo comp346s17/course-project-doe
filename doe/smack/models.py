@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.conf import settings
 
 # Create your models here.
 
@@ -99,6 +100,7 @@ class Profile(models.Model):
     gender = models.CharField(max_length=10, choices=GENDER)
     sexualOrientation = models.CharField(max_length=20, choices=SEXORIENT)
     bio = models.TextField()
+    email = models.EmailField(max_length=254)
 
     # data
     idealDate = models.IntegerField(choices=IDEALDATE)
@@ -114,8 +116,15 @@ class Profile(models.Model):
     appSampler = models.IntegerField(choices=APPSAMPLER)
     friendLookingFor = models.IntegerField(choices=FRIENDLOOKINGFOR)
     score = models.FloatField()
+    pic = models.ImageField(upload_to=settings.STATIC_ROOT, blank=True, max_length=200)
+    like = models.ManyToManyField('smack.Profile',related_name="liked_people")
+    dislike = models.ManyToManyField('smack.Profile',related_name="disliked_people")
+
+    def __str__(self):
+        return self.user.username
 
 class ProfileForm(forms.Form):
+    email = forms.EmailField()
     year = forms.ChoiceField(label='What year are you?',required=False,choices=YEAR)
     major = forms.CharField(label='What is your intended major?',required=False,max_length=100)
     gender = forms.ChoiceField(label='What is your gender?',required=False,choices=GENDER)
@@ -133,3 +142,4 @@ class ProfileForm(forms.Form):
     nap = forms.ChoiceField(label='Where is your favorite spot to nap?',required=False,choices=NAP,widget=forms.Select())
     saturday = forms.ChoiceField(label='What did you do on Saturday night?',required=False,choices=SATURDAY,widget=forms.Select())
     appSampler = forms.ChoiceField(label='What is your favorite thing to get in the app sampler?',required=False,choices=APPSAMPLER,widget=forms.Select())
+    pic = forms.ImageField(label='Upload a profile picture.')

@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from smack import views as smack_views
 
+from django.conf import settings
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.login, {'template_name': 'smack/login.html'}, name='login'),

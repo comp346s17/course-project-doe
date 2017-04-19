@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from smack import views as smack_views
+from django.conf import settings
 
 from . import views
 
