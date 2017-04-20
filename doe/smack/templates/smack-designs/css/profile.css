@@ -234,7 +234,7 @@ width: 100%;}
 #leftSidebar {
   background: #f2f2f2;
   height: 100%;
-  width: 25%;
+  width: 20%;
   background-size: cover;
   float: left;
 
@@ -244,7 +244,7 @@ width: 100%;}
 div#content{
   float: none;
   overflow: none;
-  width: 40%;
+  width: 60%;
   height: 100%;
   background: white;
   margin: auto;
@@ -256,7 +256,7 @@ div#content{
     float: right;
     background: #f2f2f2;
     height: 100%;
-    width: 25%;
+    width: 20%;
     background-size: cover;
 }
 
