@@ -81,8 +81,6 @@ def datingFeed(request):
         profiles = Profile.objects.filter(gender='male').exclude(sexualOrientation='women')
     elif profile.sexualOrientation=='women' and profile.gender=='female' :
         profiles = Profile.objects.filter(gender='female').exclude(sexualOrientation='men')
-    print(profileLike)
-    print(profileDislike)
     return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike})
 
 def friendFeed(request):
@@ -99,6 +97,7 @@ def editProfile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
+            profile.email = form.cleaned_data.get('email')
             profile.year = form.cleaned_data.get('year')
             profile.major = form.cleaned_data.get('major')
             profile.gender = form.cleaned_data.get('gender')
@@ -116,8 +115,8 @@ def editProfile(request):
             profile.nap = form.cleaned_data.get('nap')
             profile.saturday = form.cleaned_data.get('saturday')
             profile.appSampler = form.cleaned_data.get('appSampler')
-            pic = request.FILES['pic']
-            total = idealDate+kagin+cafemac+athletes+cold+lookingFor+friendLookingFor+politics+aesthetics+nap+saturday+appSampler
+            profile.pic = request.FILES['pic']
+            total = profile.idealDate+profile.kagin+profile.cafemac+profile.athletes+profile.cold+profile.lookingFor+profile.friendLookingFor+profile.politics+profile.aesthetics+profile.nap+profile.saturday+profile.appSampler
             profile.score = float(total)/12.0
             profile.save()
             return redirect('home')
