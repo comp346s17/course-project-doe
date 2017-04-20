@@ -93,3 +93,37 @@ def friendFeed(request):
     profileLike = profile.like.all()
     profileDislike = profile.dislike.all()
     return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike})
+
+def editProfile(request):
+    profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile.year = form.cleaned_data.get('year')
+            profile.major = form.cleaned_data.get('major')
+            profile.gender = form.cleaned_data.get('gender')
+            profile.sexualOrientation = form.cleaned_data.get('sexualOrientation')
+            profile.bio = form.cleaned_data.get('bio')
+            profile.idealDate = form.cleaned_data.get('idealDate')
+            profile.kagin = form.cleaned_data.get('kagin')
+            profile.cafemac = form.cleaned_data.get('cafemac')
+            profile.athletes = form.cleaned_data.get('athletes')
+            profile.cold = form.cleaned_data.get('cold')
+            profile.lookingFor = form.cleaned_data.get('lookingFor')
+            profile.friendLookingFor = form.cleaned_data.get('friendLookingFor')
+            profile.politics = form.cleaned_data.get('politics')
+            profile.aesthetics = form.cleaned_data.get('aesthetics')
+            profile.nap = form.cleaned_data.get('nap')
+            profile.saturday = form.cleaned_data.get('saturday')
+            profile.appSampler = form.cleaned_data.get('appSampler')
+            pic = request.FILES['pic']
+            total = idealDate+kagin+cafemac+athletes+cold+lookingFor+friendLookingFor+politics+aesthetics+nap+saturday+appSampler
+            profile.score = float(total)/12.0
+            profile.save()
+            return redirect('home')
+    else:
+        data = {'year':profile.year,'major':profile.major,'gender':profile.gender,'sexualOrientation':profile.sexualOrientation,'bio':profile.bio,'email':profile.email,'idealDate':profile.idealDate,'kagin':profile.kagin,'cafemac':profile.cafemac,'athletes':profile.athletes,'cold':profile.cold,'lookingFor':profile.lookingFor}
+        data1 = {'politics':profile.politics,'aesthetics':profile.aesthetics,'nap':profile.nap,'saturday':profile.saturday,'appSampler':profile.appSampler,'friendLookingFor':profile.friendLookingFor,'pic':profile.pic}
+        data.update(data1)
+        form = ProfileForm(initial=data)
+    return render(request, 'smack/editProfile.html', {'form':form})

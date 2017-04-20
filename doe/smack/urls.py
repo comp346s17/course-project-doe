@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^personalProfile/$', smack_views.personalProfile, name='personalProfile'),
     url(r'^datingFeed/$', smack_views.datingFeed, name='datingFeed'),
     url(r'^friendFeed/$', smack_views.friendFeed, name='friendFeed'),
+    url(r'^editProfile/$', smack_views.editProfile, name='editProfile'),
 ]
