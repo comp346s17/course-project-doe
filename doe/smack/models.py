@@ -116,7 +116,7 @@ class Profile(models.Model):
     appSampler = models.IntegerField(choices=APPSAMPLER)
     friendLookingFor = models.IntegerField(choices=FRIENDLOOKINGFOR)
     score = models.FloatField()
-    pic = models.ImageField(upload_to=settings.STATIC_ROOT, blank=True, max_length=200)
+    pic = models.ImageField(upload_to='profilePics', blank=True, max_length=200)
     like = models.ManyToManyField('smack.Profile',related_name="liked_people")
     dislike = models.ManyToManyField('smack.Profile',related_name="disliked_people")
 

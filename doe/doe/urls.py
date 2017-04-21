@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from smack import views as smack_views
+from django.conf.urls.static import static
 
 from django.conf import settings
 
@@ -32,3 +33,5 @@ urlpatterns = [
     url(r'^friendFeed/$', smack_views.friendFeed, name='friendFeed'),
     url(r'^editProfile/$', smack_views.editProfile, name='editProfile'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
