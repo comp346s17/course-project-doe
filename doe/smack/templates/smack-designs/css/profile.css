@@ -235,29 +235,23 @@ width: 100%;}
   background: #f2f2f2;
   height: 100%;
   width: 20%;
-  background-size: cover;
-  float: left;
+  left: 0px;
+  position: fixed;
 
 
 }
 
 div#content{
-  float: none;
-  overflow: none;
-  width: 60%;
-  height: 100%;
   background: white;
-  margin: auto;
-  position; absolute;
-  top: 0; left: 0; bottom: 0; right:0;
+  margin: 0 20%;
   }
 
 #rightSidebar{
-    float: right;
+    right: 0px;
     background: #f2f2f2;
     height: 100%;
     width: 20%;
-    background-size: cover;
+    position: fixed;
 }
 
 /*
