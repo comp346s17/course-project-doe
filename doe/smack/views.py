@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from models import Profile, ProfileForm
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -12,7 +13,7 @@ def home(request):
     if request.user.is_authenticated():
         return render(request,'smack/home.html')
     else:
-        return redirect('signin')
+        return redirect('signup')
 
 def login(request):
     return render(request,'smack/login.html')
@@ -81,7 +82,7 @@ def datingFeed(request):
         profiles = Profile.objects.filter(gender='male').exclude(sexualOrientation='women')
     elif profile.sexualOrientation=='women' and profile.gender=='female' :
         profiles = Profile.objects.filter(gender='female').exclude(sexualOrientation='men')
-    return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike})
+    return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike,'feed':'Dating Feed'})
 
 def friendFeed(request):
     profiles = Profile.objects.all().exclude(user=request.user)
@@ -90,7 +91,7 @@ def friendFeed(request):
     profile = Profile.objects.get(user=user)
     profileLike = profile.like.all()
     profileDislike = profile.dislike.all()
-    return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike})
+    return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike, 'feed':'Friend Feed'})
 
 def editProfile(request):
     profile = Profile.objects.get(user=request.user)
@@ -117,7 +118,7 @@ def editProfile(request):
             profile.appSampler = form.cleaned_data.get('appSampler')
             profile.pic = request.FILES['pic']
             total = profile.idealDate+profile.kagin+profile.cafemac+profile.athletes+profile.cold+profile.lookingFor+profile.friendLookingFor+profile.politics+profile.aesthetics+profile.nap+profile.saturday+profile.appSampler
-            profile.score = float(total)/12.0
+            profile.score = double(total)/12.0
             profile.save()
             return redirect('home')
     else:
@@ -126,3 +127,27 @@ def editProfile(request):
         data.update(data1)
         form = ProfileForm(initial=data)
     return render(request, 'smack/editProfile.html', {'form':form})
+
+def ajax_like(request):
+    profile = Profile.objects.get(user=request.user)
+    username = request.GET.get('username', None)
+    likedUser = User.objects.get(username=username)
+    likedProfile = Profile.objects.get(user=likedUser)
+    profile.like.add(likedProfile)
+    profile.dislike.remove(likedProfile)
+    data = {
+        'success' : 'success'
+    }
+    return JsonResponse(data)
+
+def ajax_dislike(request):
+    profile = Profile.objects.get(user=request.user)
+    username = request.GET.get('username', None)
+    dislikedUser = User.objects.get(username=username)
+    dislikedProfile = Profile.objects.get(user=dislikedUser)
+    profile.dislike.add(dislikedProfile)
+    profile.like.remove(dislikedProfile)
+    data = {
+        'success' : 'success'
+    }
+    return JsonResponse(data)

@@ -1,8 +1,16 @@
 {% extends 'smack/base.html' %}
 {% block title %}Login{% endblock %}
-{% block navigate %}<span></span>{% endblock %}
+
+{% block links %}
+{% load static %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock %}
+
 {% block content %}
-  <h2>Log in to Smack</h2>
+<div class="smack-body-all">
+  <div id="intro1">New to Mac? Welcome to s<font color="#f15c00">MAC</font>k</div>
+  <div id="form3" class="smack-body">
+  <center>Sign in</center><br>
   {% if form.errors %}
     <p style="color: red">Your username and password didn't match. Please try again.</p>
   {% endif %}
@@ -21,7 +29,10 @@
         {% endif %}
       </p>
     {% endfor %}
-    <button type="submit">Log in</button>
-    <a href="{% url 'signup' %}">New to My Site? Sign up</a>
-  </form>
+    <input type="submit" class="button2" value="Log in" /></center>
+    </form>
+    <br>
+    New to our site?<a href ="{%  url 'signup' %}"> signup</a>
+  </div>
+  </div>
 {% endblock %}

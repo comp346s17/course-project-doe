@@ -18,6 +18,9 @@ urlpatterns = [
     url(r'^datingFeed/$', smack_views.datingFeed, name='datingFeed'),
     url(r'^friendFeed/$', smack_views.friendFeed, name='friendFeed'),
     url(r'^editProfile/$', smack_views.editProfile, name='editProfile'),
+    url(r'^ajax/ajax_like/$', smack_views.ajax_like, name='ajax_like'),
+    url(r'^ajax/ajax_dislike/$', smack_views.ajax_dislike, name='ajax_dislike'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

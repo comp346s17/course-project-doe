@@ -1,7 +1,22 @@
 {% extends 'smack/base.html' %}
+
+{% block links %}
+  {% load static %}
+  <link type="text/css" rel="stylesheet" href="{% static '/css/home.css' %}">
+{% endblock %}
+
 {% block content %}
-<p>Welcome {{ user.username }}</p>
-<a href="{% url 'datingFeed' %}">Dating Feed</a>
-<a href="{% url 'friendFeed' %}">Friend Feed</a>
-<a href="{% url 'editProfile' %}">Edit Profile</a>
+<div id ="allWrapper">
+    <div id = "leftSidebar">
+    </div>
+    <div id = "rightSidebar">
+    </div>
+    <div id="content" style="overflow-y: auto;"><br><br><br><br><br><br><br>
+        <h1>Welcome, {{ user.username }}</h1><br><br>
+        <center>
+        <button type="button" class="wFriendFeed" ><a href="{% url 'friendFeed' %}">Your Friend Feed</a></button>
+        <button type="button" class="wDateFeed"><a href="{% url 'datingFeed' %}">Your Date Feed</a></button>
+        </center>
+        </div>
+    </div>
 {% endblock %}

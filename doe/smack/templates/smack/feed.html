@@ -1,27 +1,62 @@
 {% extends 'smack/base.html' %}
 
+{% block links %}
+{% load static %}
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+<link type="text/css" rel="stylesheet" href="{% static '/css/home.css' %}">
+{% endblock %}
+
 {% block content %}
+<!-- <div class="smack-header">
+			<div id="logo" class="smack-header">s<font color="#f15c00">MAC</font>k</div>
+      <i class="fa fa-home headerIcon1" style="font-size:36px" ><a href="{% url 'home' %}">home</a></i>
+      <i class="material-icons headerIcon3" style="font-size:36px" ><a href="{% url 'editProfile' %}">settings</a></i>
+
+
+
+</div> -->
+<div id ="allWrapper">
+    <div id = "leftSidebar">
+        <span class="feedName"><b>{{ feed }}</b></span>
+    </div>
+    <div id = "rightSidebar"></div>
+    <div id="content" style="overflow-y: auto;"><br><br><br><br><br><br>
   {% for profile in profiles %}
-    {% if profile in like %}
-      <p>{{ profile.user.username }}</p>
-      <p>{{ profile.email }}</p>
-      <p>{{ profile.bio }}</p>
-      {% load static %}
-      {% if profile.pic %}
-      <img src="{{ profile.pic.url }}">
-      {% endif %}
-      <p>{{profile.score|add:current.score}}</p>
-      <br>
-    {% elif profile in dislike %}
+  <div class="profile">
+    {% if profile in dislike %}
     {% else %}
-      <p>{{ profile.user.username }}</p>
+    <div class="centerProfile">
+      <p id="{{ profile.user.username }}">{{ profile.user.username }}</p>
+      {% if profile in like %}
+      <p>{{ profile.email }}</p>
+      {% endif %}
       <p>{{ profile.bio }}</p>
+    </div>
       {% load static %}
       {% if profile.pic %}
-      <img src="{{ profile.pic.url }}">
+    <div class="leftProfile">
+      <img class="profilePic" src="{{ profile.pic.url }}" height=100 width=100>
+      </div>
       {% endif %}
-      <p>{{profile.score|add:current.score}}</p>
+      <div class="rightProfile">
+          <div class="progress-container" style="width: 100%">
+              <div class="progress">
+                {% with current_score=profile.score|add:current.score %}
+                <p class="score">{{current_score}}</p>
+                {% endwith %}
+              </div>
+          </div><br><br>
+          <button type="button" class="smackDat" id="{{ profile.user.username }}">smackDat</button><br><br>
+          <button type ='button' class="noThanks" id="{{ profile.user.username }}">noThanks</button><br><br>
       <br>
+    </div>
+  </div>
+
     {% endif %}
   {% endfor %}
+
+  <script type="text/javascript" src="{% static '/js/feed.js' %}"></script>
 {% endblock %}

@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+
+    <meta name ='viewport' content="width=device-width, initial-scale=1.0" charset="UTF-8">
     <title>{% block title %}sMACk{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Bitter|Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% block links %}
+    {% endblock %}
   </head>
   <body>
     <header>
-      <h1 class="text-center">My Site</h1>
-      {% if user.is_authenticated %}
-        <a class="text-center" href="{% url 'logout' %}">logout</a>
-      {% else %}
-        <a class="text-center" href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}" class="text-center">signup</a>
-      {% endif %}
-      <hr>
+      <div class="smack-header-base">
+      <div class="smack-header">
+        <div id="logo" class="smack-header">s<font color="#f15c00">MAC</font>k</div>
+          {% if user.is_authenticated %}
+            <i class="fa fa-home headerIcon1" style="font-size:36px" ><a href="{% url 'home' %}">home</a></i>
+            <i class="material-icons headerIcon3" style="font-size:36px" ><a href="{% url 'editProfile' %}">settings</a></i>
+            <a class="text-center" href="{% url 'logout' %}">logout</a>
+          {% else %}
+            <a class="text-center1" href="{% url 'login' %}">Login</a> /
+            <a class='text-center2' href="{% url 'signup' %}">Signup</a>
+          {% endif %}
+      </div>
+    </div>
     </header>
     <main>
       {% block content %}{% endblock %}
     </main>
-    <footer>
-      <p>Created by Ethan Levin, Olivia Newman and Dongmin Park</p>
-    </footer>
   </body>
 </html>
