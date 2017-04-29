@@ -3,9 +3,6 @@ $(document).ready(function() {
     value = $(this).html();
     console.log(value);
     value = value/10000000000000;
-    // if(value.length > 13) {
-    //   value = value.substring(0,16);
-    // }
     if(value>99) {
       value = value/10;
     }
@@ -16,6 +13,7 @@ $(document).ready(function() {
 
 $('.smackDat').click(function(e) {
   console.log("hit a button");
+  console.log(alert("You smacked dat!"));
   username = e.target.id;
   console.log(username);
   $.ajax({
@@ -32,6 +30,7 @@ $('.smackDat').click(function(e) {
 
 $('.noThanks').click(function(e) {
   console.log("hit a button");
+  console.log(alert("They're not for you."));
   username = e.target.id;
   console.log(username);
   $.ajax({
