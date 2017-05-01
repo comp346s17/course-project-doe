@@ -96,6 +96,7 @@ FRIENDLOOKINGFOR = [
 # profile model containing information used to compare one profile to another
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    full_name = models.CharField(max_length=200)
     year = models.CharField(max_length=10, choices=YEAR)
     major = models.CharField(max_length=100)
     gender = models.CharField(max_length=10, choices=GENDER)
@@ -118,14 +119,15 @@ class Profile(models.Model):
     friendLookingFor = models.IntegerField(choices=FRIENDLOOKINGFOR)
     score = models.FloatField()
     pic = models.ImageField(upload_to='profilePics', blank=True, max_length=200, default='')
-    like = models.ManyToManyField('smack.Profile',related_name="liked_people")
-    dislike = models.ManyToManyField('smack.Profile',related_name="disliked_people")
+    like = models.ManyToManyField('smack.Profile', related_name="liked_people", blank=True)
+    dislike = models.ManyToManyField('smack.Profile', related_name="disliked_people", blank=True)
 
     def __str__(self):
         return self.user.username
 
 # ProfileForm for the Profile model
 class ProfileForm(forms.Form):
+    full_name = forms.CharField()
     email = forms.EmailField()
     year = forms.ChoiceField(label='What year are you?',required=False,choices=YEAR)
     major = forms.CharField(label='What is your intended major?',required=False,max_length=100)

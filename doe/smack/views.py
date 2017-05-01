@@ -46,6 +46,7 @@ def personalProfile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
+            full_name = form.cleaned_data.get('full_name')
             year = form.cleaned_data.get('year')
             major = form.cleaned_data.get('major')
             gender = form.cleaned_data.get('gender')
@@ -67,6 +68,10 @@ def personalProfile(request):
             total = idealDate+kagin+cafemac+athletes+cold+lookingFor+friendLookingFor+politics+aesthetics+nap+saturday+appSampler
             score = float(total)/12.0
             Profile.objects.create(user=currentProfile,year=year,major=major,gender=gender,sexualOrientation=sexualOrientation,bio=bio,idealDate=idealDate,kagin=kagin,cafemac=cafemac,athletes=athletes,cold=cold,lookingFor=lookingFor,friendLookingFor=friendLookingFor,politics=politics,aesthetics=aesthetics,nap=nap,appSampler=appSampler,saturday=saturday,score=score,pic=pic)
+            if request.user.is_authenticated():
+                user = request.user
+            profile = Profile.objects.get(user=user)
+            profile.dislike.add(profile)
             return redirect('home')
     else:
         form = ProfileForm()
@@ -106,6 +111,7 @@ def editProfile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
+            profile.full_name = form.cleaned_data.get('full_name')
             profile.email = form.cleaned_data.get('email')
             profile.year = form.cleaned_data.get('year')
             profile.major = form.cleaned_data.get('major')

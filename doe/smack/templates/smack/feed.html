@@ -26,7 +26,7 @@
     <div class="centerProfile">
       <div class="profileInfo">
       <center>
-      <p id="{{ profile.user.username }}"><b>Username:</b> {{ profile.user.username }}</p>
+      <p id="{{ profile.full_name }}"><b>Name:</b> {{ profile.full_name }}</p>
       {% if profile in like %}
       <p><b>Email:</b> {{ profile.email }}</p>
       {% endif %}
