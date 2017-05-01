@@ -1,1 +1,6 @@
 # sMACk
+Explanation of App
+sMACk is a dating app exclusively created for the Macalester student body. It is built using django, html, css, and javascript. The app allows users to sign up for an account, which includes many different fields that are specifically catered to Macalester students. Then it creates a score depending on how the user has answered the questions on the sign up sheet. Once the account is established, users can see other profiles either in the friend feed or the dating feed as well as how compatible they are with the user based on the compatibility score. The user has the option to like ("smack dat") a user in the feed or dislike ("no thanks"). If both users like eath other, then their emails are visible so that the users can contact each other.  
+
+How to clone/setup/run repository
+The repository can be cloned via github using the clone button. To setup and run the repository, open the command prompt and go to the directory where the repository is and run the following command: python manage.py runserver. Then open a web browser and navigate to the website the command prompt states to start the application. If you have not signed up for an account or are not logged in, you will need to sign up for an account or log in. 
