@@ -21,3 +21,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "doe.settings")
 application = get_wsgi_application()
 application = django.core.handlers.wsgi.WSGIHandler()
 application = DjangoWhiteNoise(application)
+
+from dj_static import Cling
+
+application = Cling(get_wsgi_application())
