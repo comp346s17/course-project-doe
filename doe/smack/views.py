@@ -90,7 +90,7 @@ def datingFeed(request):
         profiles = Profile.objects.filter(gender='female').exclude(sexualOrientation='men')
     return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike,'feed':'Dating'})
 
-displays the proper people for the datingFeed
+# displays the proper people for the datingFeed
 def friendFeed(request):
     profiles = Profile.objects.all().exclude(user=request.user)
     if request.user.is_authenticated():
