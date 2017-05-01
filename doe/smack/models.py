@@ -93,6 +93,7 @@ FRIENDLOOKINGFOR = [
 (10,'High five when drunk')
 ]
 
+# profile model containing information used to compare one profile to another
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     year = models.CharField(max_length=10, choices=YEAR)
@@ -123,6 +124,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+# ProfileForm for the Profile model
 class ProfileForm(forms.Form):
     email = forms.EmailField()
     year = forms.ChoiceField(label='What year are you?',required=False,choices=YEAR)

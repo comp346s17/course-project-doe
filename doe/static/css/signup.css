@@ -67,25 +67,28 @@ body{
 	right:0px;
 	top:90px;
 	width:100%;
-	height:645px;
+	height:845px;
 	padding: 20px;
 	border-radius: 25px;
 	margin: 0px;
-    background-color: #ffffff;
-    border: 1px solid black;
-    background: rgba(255, 255, 255, 0.6);
-    font-color: black;
+  background-color: #ffffff;
+  border: 1px solid black;
+  background: rgba(255, 255, 255, 0.6);
+  color: black;
 }
-#intro1{
 
+
+#intro1{
 	width: 650px;
-	font-family: 'Bitter', serif
+	font-family: 'Bitter', serif;
 	color:#142170;
 	height:75px;
 	text-align: center;
 	font-size: 35px;
 	padding: 20px;
 	margin-top: 35px;
+
+
 }
 
 #form3{

@@ -1,16 +1,28 @@
+
 h1{
     font-family: 'Open Sans', sans-serif;
     text-align: center;
-}
-
-a {
-	text-decoration: none;
 }
 
 html, body {margin: 0; padding: 0;}
 
 body{
 	height:750px;
+
+}
+
+a{
+  text-decoration: none;
+}
+.feedName{
+    display: none;
+    }
+.text-center{
+	left: 90%;
+	top: 35px;
+	position: absolute;
+	z-index: 20;
+	font-size: 18px;
 
 }
 .smack-header-base{
@@ -35,15 +47,6 @@ body{
 	z-index:7;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 75px;
-}
-
-.text-center{
-	left: 90%;
-	top: 35px;
-	position: absolute;
-	z-index: 20;
-	font-size: 18px;
-
 }
 
 #img1{
@@ -85,7 +88,19 @@ body{
 }
 
 .headerIcon1{
-  left:40%;
+    left:525px;
+	top:35px;
+	color:white;
+	position:absolute;
+	z-index:20;
+	height:22px;
+	width:50px;
+
+}
+
+
+.headerIcon2{
+    left:662.5px;
 	top:35px;
 	color:white;
 	position:absolute;
@@ -96,7 +111,7 @@ body{
 }
 
 .headerIcon3{
-  left:55%;
+    left:800px;
 	top:35px;
 	color:white;
 	position:absolute;
@@ -105,6 +120,7 @@ body{
 	width:50px;
 
 }
+
 
 
 .smack-body{
@@ -116,72 +132,13 @@ body{
 
 
 }
-#intro1{
-	right:178px;
-	top:20px;
-	font-family:verdana;
-	font-size:20px;
-	color:#142170;
-	height:75px;
-	width:550px;
-}
-#intro2{
-	right:750px;
-	top:20px;
-	font-family:verdana;
-	font-size:30px;
-	color:#000;
-	font-weight:bold;
-	height:75px;
-	width:500px;
-}
-#img2{
-	top:130px;
-	right:178px;
-	width:537px;
-	height:195px;
+.instructions{
+  text-align: center;
+  font-family: verdana;
+  font-size: 18px;
 }
 
-#form3{
-	top:120px;
-	right:750px;
-	font-family:verdana;
-	font-size:20px;
-	color:#142170;
-	width:450px;
-	height:495px;
-
-}
-#namebox{
-	width:200px;
-	height:20px;
-	border-radius:5px 5px 5px 5px;
-	background:white;
-	padding:10px;
-	font-size:16px;
-	margin-top:8px;
-	border-width: 1px;
-	border-style:solid;
-	border-color: gray;
-}
-#mailbox{
-	width:400px;
-	height:20px;
-	border-radius:5px 5px 5px 5px;
-	background:white;
-	padding:10px;
-	font-size:16px;
-	margin-top:8px;
-	border-width: 1px;
-	border-style:solid;
-	border-color: gray;
-}
-#r-b{
-	font-size:12px;
-	height:15px;
-	width:15px;
-}
-.button2{
+button{
 	width:250px;
 	height:40px;
 	left:750px;

@@ -1,13 +1,15 @@
 $(document).ready(function() {
   $('.score').each(function() {
     value = $(this).html();
-    console.log(value);
     value = value/10000000000000;
     if(value>99) {
       value = value/10;
     }
+    value = parseInt(value);
+    style = "width: "+value+"%";
     console.log(value);
-    $(this).html(value);
+    $(this).attr("style",style);
+    $(this).html("");
   });
 });
 

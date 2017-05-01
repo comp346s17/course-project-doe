@@ -6,36 +6,35 @@
   src="https://code.jquery.com/jquery-3.2.1.js"
   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
   crossorigin="anonymous"></script>
-<link type="text/css" rel="stylesheet" href="{% static '/css/home.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static '/css/feed.css' %}">
+
 {% endblock %}
 
 {% block content %}
-<!-- <div class="smack-header">
-			<div id="logo" class="smack-header">s<font color="#f15c00">MAC</font>k</div>
-      <i class="fa fa-home headerIcon1" style="font-size:36px" ><a href="{% url 'home' %}">home</a></i>
-      <i class="material-icons headerIcon3" style="font-size:36px" ><a href="{% url 'editProfile' %}">settings</a></i>
-
-
-
-</div> -->
 <div id ="allWrapper">
     <div id = "leftSidebar">
         <span class="feedName"><b>{{ feed }}</b></span>
     </div>
-    <div id = "rightSidebar"></div>
+    <div id = "rightSidebar">
+    <span class='feedName'><b>Feed</b></span>
+  </div>
     <div id="content" style="overflow-y: auto;"><br><br><br><br><br><br>
   {% for profile in profiles %}
-  <div class="profile">
     {% if profile in dislike %}
     {% else %}
+    <div class="profile">
     <div class="centerProfile">
-      <p id="{{ profile.user.username }}">{{ profile.user.username }}</p>
+      <div class="profileInfo">
+      <center>
+      <p id="{{ profile.user.username }}"><b>Username:</b> {{ profile.user.username }}</p>
       {% if profile in like %}
-      <p>{{ profile.email }}</p>
+      <p><b>Email:</b> {{ profile.email }}</p>
       {% endif %}
-      <p>{{ profile.bio }}</p>
-      <p>{{ profile.year }}</p>
-      <p>{{ profile.major }}</p>
+      <p><b>Bio:</b> {{ profile.bio }}</p>
+      <p><b>Year:</b> {{ profile.year }}</p>
+      <p><b>Major:</b> {{ profile.major }}</p>
+    </center>
+    </div>
     </div>
       {% load static %}
       {% if profile.pic %}
@@ -47,18 +46,21 @@
           <div class="progress-container" style="width: 100%">
               <div class="progress">
                 {% with current_score=profile.score|add:current.score %}
-                <p class="score">{{current_score}}</p>
+                <div class="score">{{ current_score }}</div>
                 {% endwith %}
               </div>
           </div><br><br>
-          <button type="button" class="smackDat" id="{{ profile.user.username }}">smackDat</button><br><br>
-          <button type ='button' class="noThanks" id="{{ profile.user.username }}">noThanks</button><br><br>
+          <button type="button" class="smackDat" id="{{ profile.user.username }}">smack dat  </button><br><br>
+          <button type ='button' class="noThanks" id="{{ profile.user.username }}">no thanks  </button><br><br>
       <br>
     </div>
   </div>
-
+  <br>
+  <br>
     {% endif %}
   {% endfor %}
+</div>
+</div>
 
-  <script type="text/javascript" src="{% static '/js/feed.js' %}"></script>
+<script type="text/javascript" src="{% static '/js/feed.js' %}"></script>
 {% endblock %}

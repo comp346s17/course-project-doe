@@ -9,18 +9,22 @@ from django.http import JsonResponse
 
 # Create your views here.
 
+# home page, will redirect you to signup page if not signed in
 def home(request):
     if request.user.is_authenticated():
         return render(request,'smack/home.html')
     else:
         return redirect('signup')
 
+# login page
 def login(request):
     return render(request,'smack/login.html')
 
+# signin page
 def signin(request):
     return render(request,'smack/signin.html')
 
+# signup page, creates a new user object that will become a part of a profile, redirects to personalProfile when done
 def signup(request):
     if request.method == 'POST':
         userForm = UserCreationForm(request.POST)
@@ -35,6 +39,7 @@ def signup(request):
         userForm = UserCreationForm()
     return render(request, 'smack/signup.html', {'form': userForm})
 
+# creates a new personalProfile for a user
 def personalProfile(request):
     print(request.POST)
     currentProfile = request.user
@@ -67,6 +72,7 @@ def personalProfile(request):
         form = ProfileForm()
     return render(request, 'smack/personProfile.html',{'form':form})
 
+# displays the proper people for the datingFeed
 def datingFeed(request):
     profiles = Profile.objects.all().exclude(user=request.user)
     if request.user.is_authenticated():
@@ -82,8 +88,9 @@ def datingFeed(request):
         profiles = Profile.objects.filter(gender='male').exclude(sexualOrientation='women')
     elif profile.sexualOrientation=='women' and profile.gender=='female' :
         profiles = Profile.objects.filter(gender='female').exclude(sexualOrientation='men')
-    return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike,'feed':'Dating Feed'})
+    return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike,'feed':'Dating'})
 
+displays the proper people for the datingFeed
 def friendFeed(request):
     profiles = Profile.objects.all().exclude(user=request.user)
     if request.user.is_authenticated():
@@ -91,8 +98,9 @@ def friendFeed(request):
     profile = Profile.objects.get(user=user)
     profileLike = profile.like.all()
     profileDislike = profile.dislike.all()
-    return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike, 'feed':'Friend Feed'})
+    return render(request, 'smack/feed.html',{'profiles': profiles,'current': profile, 'like':profileLike, 'dislike':profileDislike, 'feed':'Friend'})
 
+# allows you to edit your profile, will load existing information
 def editProfile(request):
     profile = Profile.objects.get(user=request.user)
     if request.method == 'POST':
@@ -118,7 +126,7 @@ def editProfile(request):
             profile.appSampler = form.cleaned_data.get('appSampler')
             profile.pic = request.FILES['pic']
             total = profile.idealDate+profile.kagin+profile.cafemac+profile.athletes+profile.cold+profile.lookingFor+profile.friendLookingFor+profile.politics+profile.aesthetics+profile.nap+profile.saturday+profile.appSampler
-            profile.score = double(total)/12.0
+            profile.score = float(total)/12.0
             profile.save()
             return redirect('home')
     else:
@@ -128,6 +136,7 @@ def editProfile(request):
         form = ProfileForm(initial=data)
     return render(request, 'smack/editProfile.html', {'form':form})
 
+# allows you to like a profile without refreshing the page
 def ajax_like(request):
     profile = Profile.objects.get(user=request.user)
     username = request.GET.get('username', None)
@@ -140,6 +149,7 @@ def ajax_like(request):
     }
     return JsonResponse(data)
 
+# allows you to dislike a profile without refreshing the page
 def ajax_dislike(request):
     profile = Profile.objects.get(user=request.user)
     username = request.GET.get('username', None)

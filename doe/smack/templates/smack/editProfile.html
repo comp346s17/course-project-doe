@@ -1,7 +1,22 @@
 {% extends 'smack/base.html' %}
 {% block title %}Edit Profile{% endblock %}
 
+{% block links %}
+{% load static %}
+<link type="text/css" rel="stylesheet" href="{% static '/css/profile.css' %}">
+{% endblock %}
+
 {% block content %}
+<div id ="allWrapper">
+    <div id = "leftSidebar">
+        <span class="feedName"><b>{{ feed }}</b></span>
+    </div>
+    <div id = "rightSidebar">
+    <span class='feedName'><b>Feed</b></span>
+  </div>
+  <div id="content" style="overflow-y: auto;"><br><br><br><br><br><br>
+  <div class="instructions">Fill out the questions below so that we can better match you.</div>
+    <center>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% for field in form %}
@@ -10,6 +25,8 @@
         {{ field }}
       </p>
     {% endfor %}
-    <button type="submit">Submit Profile</button>
+    <button type="submit">Submit Profile</button><br><br><br>
   </form>
+</center>
+</div>
 {% endblock %}

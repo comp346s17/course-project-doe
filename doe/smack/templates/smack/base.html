@@ -17,14 +17,14 @@
       <div class="smack-header">
         <div id="logo" class="smack-header">s<font color="#f15c00">MAC</font>k</div>
           {% if user.is_authenticated %}
-            <i class="fa fa-home headerIcon1" style="font-size:36px" ><a href="{% url 'home' %}">home</a></i>
-            <i class="material-icons headerIcon3" style="font-size:36px" ><a href="{% url 'editProfile' %}">settings</a></i>
+            <a href="{% url 'home' %}" class="headerIcon1" style="font-size:30px">HOME</a>
+            <a href="{% url 'editProfile' %}" class="headerIcon3" style="font-size:30px">SETTINGS</a>
             <a class="text-center" href="{% url 'logout' %}">logout</a>
           {% else %}
             <a class="text-center1" href="{% url 'login' %}">Login</a> /
             <a class='text-center2' href="{% url 'signup' %}">Signup</a>
           {% endif %}
-      </div>
+      </div>s
     </div>
     </header>
     <main>
