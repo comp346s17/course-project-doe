@@ -1,11 +1,17 @@
 $(document).ready(function() {
+  $('.profile_score').each(function() {
+    value = $(this).html();
+    console.log(value);
+  });
+
   $('.score').each(function() {
     value = $(this).html();
-    value = value/10000000000000;
-    if(value>99) {
-      value = value/10;
-    }
+    console.log(value);
     value = parseInt(value);
+    if(value > 10) {
+      value = Math.abs(10 - value);
+    }
+    value = value * 10;
     style = "width: "+value+"%";
     console.log(value);
     $(this).attr("style",style);

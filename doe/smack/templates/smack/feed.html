@@ -46,6 +46,7 @@
           <div class="progress-container" style="width: 100%">
               <div class="progress">
                 {% with current_score=profile.score|add:current.score %}
+                <!-- <div class='profile_score'>{{ profile.score }}+ {{ current.score }}</div> -->
                 <div class="score">{{ current_score }}</div>
                 {% endwith %}
               </div>

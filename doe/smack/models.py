@@ -117,8 +117,8 @@ class Profile(models.Model):
     saturday = models.IntegerField(choices=SATURDAY)
     appSampler = models.IntegerField(choices=APPSAMPLER)
     friendLookingFor = models.IntegerField(choices=FRIENDLOOKINGFOR)
-    score = models.FloatField()
-    pic = models.ImageField(upload_to='profilePics', blank=True, max_length=200, default='')
+    score = models.DecimalField(max_digits=3,decimal_places=2)
+    pic = models.ImageField(upload_to='profilePics', blank=True, null=True, max_length=200, default='')
     like = models.ManyToManyField('smack.Profile', related_name="liked_people", blank=True)
     dislike = models.ManyToManyField('smack.Profile', related_name="disliked_people", blank=True)
 
@@ -146,4 +146,4 @@ class ProfileForm(forms.Form):
     nap = forms.ChoiceField(label='Where is your favorite spot to nap?',required=False,choices=NAP,widget=forms.Select())
     saturday = forms.ChoiceField(label='What did you do on Saturday night?',required=False,choices=SATURDAY,widget=forms.Select())
     appSampler = forms.ChoiceField(label='What is your favorite thing to get in the app sampler?',required=False,choices=APPSAMPLER,widget=forms.Select())
-    pic = forms.ImageField(label='Upload a profile picture.')
+    pic = forms.ImageField(label='Upload a profile picture.',required=False)

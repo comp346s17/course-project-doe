@@ -47,6 +47,7 @@ def personalProfile(request):
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             full_name = form.cleaned_data.get('full_name')
+            email = form.cleaned_data.get('email')
             year = form.cleaned_data.get('year')
             major = form.cleaned_data.get('major')
             gender = form.cleaned_data.get('gender')
@@ -65,9 +66,9 @@ def personalProfile(request):
             saturday = form.cleaned_data.get('saturday')
             appSampler = form.cleaned_data.get('appSampler')
             pic = request.FILES['pic']
-            total = idealDate+kagin+cafemac+athletes+cold+lookingFor+friendLookingFor+politics+aesthetics+nap+saturday+appSampler
-            score = float(total)/12.0
-            Profile.objects.create(user=currentProfile,year=year,major=major,gender=gender,sexualOrientation=sexualOrientation,bio=bio,idealDate=idealDate,kagin=kagin,cafemac=cafemac,athletes=athletes,cold=cold,lookingFor=lookingFor,friendLookingFor=friendLookingFor,politics=politics,aesthetics=aesthetics,nap=nap,appSampler=appSampler,saturday=saturday,score=score,pic=pic)
+            total = int(idealDate)+int(kagin)+int(cafemac)+int(athletes)+int(cold)+int(lookingFor)+int(friendLookingFor)+int(politics)+int(aesthetics)+int(nap)+int(saturday)+int(appSampler)
+            score = int(total)/12
+            Profile.objects.create(full_name=full_name,email=email,user=currentProfile,year=year,major=major,gender=gender,sexualOrientation=sexualOrientation,bio=bio,idealDate=idealDate,kagin=kagin,cafemac=cafemac,athletes=athletes,cold=cold,lookingFor=lookingFor,friendLookingFor=friendLookingFor,politics=politics,aesthetics=aesthetics,nap=nap,appSampler=appSampler,saturday=saturday,score=score,pic=pic)
             if request.user.is_authenticated():
                 user = request.user
             profile = Profile.objects.get(user=user)
@@ -130,14 +131,13 @@ def editProfile(request):
             profile.nap = form.cleaned_data.get('nap')
             profile.saturday = form.cleaned_data.get('saturday')
             profile.appSampler = form.cleaned_data.get('appSampler')
-            profile.pic = request.FILES['pic']
-            total = profile.idealDate+profile.kagin+profile.cafemac+profile.athletes+profile.cold+profile.lookingFor+profile.friendLookingFor+profile.politics+profile.aesthetics+profile.nap+profile.saturday+profile.appSampler
-            profile.score = float(total)/12.0
+            total = int(profile.idealDate)+int(profile.kagin)+int(profile.cafemac)+int(profile.athletes)+int(profile.cold)+int(profile.lookingFor)+int(profile.friendLookingFor)+int(profile.politics)+int(profile.aesthetics)+int(profile.nap)+int(profile.saturday)+int(profile.appSampler)
+            profile.score = total/12
             profile.save()
             return redirect('home')
     else:
         data = {'year':profile.year,'major':profile.major,'gender':profile.gender,'sexualOrientation':profile.sexualOrientation,'bio':profile.bio,'email':profile.email,'idealDate':profile.idealDate,'kagin':profile.kagin,'cafemac':profile.cafemac,'athletes':profile.athletes,'cold':profile.cold,'lookingFor':profile.lookingFor}
-        data1 = {'politics':profile.politics,'aesthetics':profile.aesthetics,'nap':profile.nap,'saturday':profile.saturday,'appSampler':profile.appSampler,'friendLookingFor':profile.friendLookingFor,'pic':profile.pic}
+        data1 = {'politics':profile.politics,'aesthetics':profile.aesthetics,'nap':profile.nap,'saturday':profile.saturday,'appSampler':profile.appSampler,'friendLookingFor':profile.friendLookingFor,'pic':profile.pic,'full_name':profile.full_name}
         data.update(data1)
         form = ProfileForm(initial=data)
     return render(request, 'smack/editProfile.html', {'form':form})
